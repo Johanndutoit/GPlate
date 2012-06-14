@@ -19,12 +19,14 @@ class License(db.Model):
 	owner = db.UserProperty()
 	name = db.StringProperty()
 	content = db.StringProperty(multiline=True)
-	private = db.StringProperty(multiline=True)
-	public = db.StringProperty(multiline=True)
+	uid = db.StringProperty(multiline=True)
+	secret = db.StringProperty(multiline=True)
 	created = db.DateTimeProperty(auto_now_add=True)
 	lastupdated = db.DateTimeProperty(auto_now_add=True)
 
+# Assign some DAL Methods
 License.by_user = dal.licenses_by_user
+License.by_uid = dal.license_by_uid
 
 class LicenseAccessToken(db.Model):
 	"""The structure of a License Use Case"""
@@ -35,6 +37,11 @@ class LicenseAccessToken(db.Model):
 	expire = db.DateTimeProperty()
 	lastupdated = db.DateTimeProperty(auto_now_add=True)
 
+# Assign some DAL Methods
+LicenseAccessToken.by_user = dal.licenses_by_user
+LicenseAccessToken.by_license = dal.licenses_by_user
+LicenseAccessToken.by_id = dal.licenses_by_user
+
 class LicenseUse(db.Model):
 	"""The structure of a License Use Case"""
 	user = db.UserProperty()
@@ -42,9 +49,19 @@ class LicenseUse(db.Model):
 	created = db.DateTimeProperty(auto_now_add=True)
 	lastupdated = db.DateTimeProperty(auto_now_add=True)
 
+# Assign some DAL Methods
+LicenseUse.by_user = dal.licenses_by_user
+LicenseUse.by_license = dal.licenses_by_user
+LicenseUse.by_id = dal.licenses_by_user
+
 class History(db.Model):
 	"""Models a History Item. In Other words a Event Log Item."""
 	user = db.UserProperty()
 	message = db.StringProperty(multiline=True)
 	created = db.DateTimeProperty(auto_now_add=True)
 	lastupdated = db.DateTimeProperty(auto_now_add=True)
+
+# Assign some DAL Methods
+History.by_user = dal.licenses_by_user
+History.by_license = dal.licenses_by_user
+

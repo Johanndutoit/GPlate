@@ -1,4 +1,4 @@
-application: lll
+application: license-manager
 version: 1
 runtime: python27
 api_version: 1
@@ -8,6 +8,15 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+
+- url: /css
+  static_files: public/css
+
+- url: /js
+  static_files: public/js
+
+- url: /img
+  static_files: public/img
 
 - url: .*
   script: main.app
